@@ -17,17 +17,16 @@ const part1 = (rawInput: string) => {
 const part2 = (rawInput: string) => {
   const input = parseInput(rawInput);
   const measurements = input.split("\n");
-  const sums: number[] = [];
-  measurements.map((item, index) => {
-    if (measurements.length >= index + 2) {
-      sums.push(Number(item) + Number(measurements[index + 1]) + Number(measurements[index + 2]))
-    }
-  })
-
+  let prevSum = 0;
   let counter = 0;
-  sums.reduce((acc, cur) => {
-    if (cur > acc) counter++;
-    return cur;
+  measurements.map((item, index) => {
+    if (index === 0) {
+      prevSum = Number(item) + Number(measurements[index + 1]) + Number(measurements[index + 2]);
+    }
+
+    const currentSum = Number(item) + Number(measurements[index + 1]) + Number(measurements[index + 2]);
+    if (currentSum > prevSum) counter++;
+    prevSum = currentSum;
   })
 
   return counter;
