@@ -2,14 +2,19 @@ import run from "aocrunner";
 
 const parseInput = (rawInput: string) => rawInput;
 
-const part1 = (rawInput: string) => {
+const getInputArray = (rawInput: string) => {
   const input = parseInput(rawInput);
+  return input.split("\n");
+}
+
+const part1 = (rawInput: string) => {
+  const input = getInputArray(rawInput);
 
   return;
 };
 
 const part2 = (rawInput: string) => {
-  const input = parseInput(rawInput);
+  const input = getInputArray(rawInput);
 
   return;
 };
