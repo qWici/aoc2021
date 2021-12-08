@@ -64,12 +64,12 @@ const generateLine = (x1: number, y1: number, x2: number, y2: number, diagonal =
 }
 
 type Line = [x1: number, y1: number, x2: number, y2: number];
-const part1 = (rawInput: string) => {
+const solution = (rawInput: string, withDiagonal = false ) => {
   const input = getInputArray(rawInput) as Line[];
   const points: Record<string, number> = {};
   input.map((item) => {
     const [x1, y1, x2, y2] = item;
-    const line = generateLine(x1, y1, x2, y2);
+    const line = generateLine(x1, y1, x2, y2, withDiagonal);
 
     line.map((point) => {
       if (point.length === 0) return;
@@ -80,24 +80,13 @@ const part1 = (rawInput: string) => {
   })
 
   return Object.values(points).filter(value => value >= 2).length;
+}
+const part1 = (rawInput: string) => {
+  return solution(rawInput);
 };
 
 const part2 = (rawInput: string) => {
-  const input = getInputArray(rawInput) as Line[];
-  const points: Record<string, number> = {};
-  input.map((item) => {
-    const [x1, y1, x2, y2] = item;
-    const line = generateLine(x1, y1, x2, y2, true);
-
-    line.map((point) => {
-      if (point.length === 0) return;
-      const [x, y] = point;
-      const key = `${x}_${y}`;
-      points[key] = points[key] ? points[key] + 1 : 1;
-    })
-  })
-
-  return Object.values(points).filter(value => value >= 2).length;
+  return solution(rawInput, true);
 };
 
 run({
